@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements
+        ChatFragment.OnFragmentInteractionListener,
         BluetoothFragment.OnFragmentInteractionListener{
 
     // Intent request codes //
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements
     public static final String TOAST = "toast";
 
     private FragmentTabHost mTabHost;
+    private static ChatFragment chatFragment;
     private static BluetoothFragment bluetoothFragment;
 
     private static GridView gridView;
@@ -57,9 +59,11 @@ public class MainActivity extends AppCompatActivity implements
 
         mTabHost = (FragmentTabHost) findViewById(android.R.id.tabhost);
         mTabHost.setup(this, getSupportFragmentManager(), android.R.id.tabcontent);
+
+        mTabHost.addTab(mTabHost.newTabSpec("Chat").setIndicator("Chat", null),
+                ChatFragment.class, null);
         mTabHost.addTab(mTabHost.newTabSpec("Bluetooth").setIndicator("Bluetooth", null),
                 BluetoothFragment.class, null);
-
 
         gridView = (GridView) findViewById(R.id.mapGridView);
 
@@ -126,8 +130,11 @@ public class MainActivity extends AppCompatActivity implements
         if (attachedFragment.getClass().equals((BluetoothFragment.class))) {
             bluetoothFragment = (BluetoothFragment) attachedFragment;
         }
-    }
+        if (attachedFragment.getClass().equals((ChatFragment.class))) {
+            chatFragment = (ChatFragment)attachedFragment;
+        }
 
+    }
 
 
 
@@ -138,6 +145,9 @@ public class MainActivity extends AppCompatActivity implements
 
         bluetoothService.connect(device, true);
     }
+
+
+    @Override
     public void sendMessage(String message) {
 
         // Check that we're actually connected before trying anything
@@ -179,6 +189,45 @@ public class MainActivity extends AppCompatActivity implements
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
+
+                case MESSAGE_STATE_CHANGE:
+                    switch (msg.arg1) {
+                        case BluetoothChatService.STATE_CONNECTED:
+                            setStatus("Connected to "+connectedDeviceName);
+                            if (ChatFragment.chatArrayAdapter != null) {
+                                ChatFragment.chatArrayAdapter.clear();
+                            }
+
+                            break;
+                        case BluetoothChatService.STATE_CONNECTING:
+                            setStatus("Connecting...");
+                            break;
+                        case BluetoothChatService.STATE_LISTEN:
+                        case BluetoothChatService.STATE_NONE:
+                            setStatus("Not connected");
+                            break;
+                    }
+                    break;
+                case MESSAGE_WRITE:
+                    byte[] writeBuf = (byte[]) msg.obj;
+                    // construct a string from the buffer
+                    String writeMessage = new String(writeBuf);
+                    if (ChatFragment.chatArrayAdapter != null) {
+                        ChatFragment.chatArrayAdapter.add("Group 3 Whoop: " + writeMessage);
+                    }
+                    break;
+
+                // we are reading from here whenever a object is send to us
+                case MESSAGE_READ:
+                    byte[] readBuf = (byte[]) msg.obj;
+
+                    // construct a string from the valid bytes in the buffer
+                    String readMessage = new String(readBuf, 0, msg.arg1);
+                    ChatFragment.chatArrayAdapter.add(connectedDeviceName + ": " + readMessage);
+
+
+                    break;
+
                 case MESSAGE_DEVICE_NAME:
                     // save the connected device name
                     connectedDeviceName = msg.getData().getString(DEVICE_NAME);
@@ -192,27 +241,13 @@ public class MainActivity extends AppCompatActivity implements
         }
     };
 
-    private String hexToBinary(String hex) {
-        int pointer = 0;
-        String binary = "";
-        String partial;
-        // 1 Hex digits each time to prevent overflow and recognize leading 0000
-        while (hex.length() - pointer > 0) {
-            partial = hex.substring(pointer, pointer + 1);
-            String bin;
-            if (!partial.equals("\n" )){
-                bin = Integer.toBinaryString(Integer.parseInt(partial, 16));
-            } else{
-                bin = "";
-            }
-            for (int i = 0; i < 4 - bin.length(); i++) {
-                binary = binary.concat("0");
-            }
-            binary = binary.concat(bin);
-            pointer += 1;
-        }
-        return binary;
+
+    public String getMdfExploredString() {
+        return mdfExploredString;
     }
 
+    public String getMdfObstacleString() {
+        return mdfObstacleString;
+    }
 
 }

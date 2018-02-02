@@ -31,32 +31,59 @@
                 android:text="F2"/>
 
             <Button
-                android:id="@+id/mdfExplorationBtn"
+                android:id="@+id/reconfigureBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Exploration"/>
-
-            <Button
-                android:id="@+id/mdfObstacleBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Obstacle"/>
-
+                android:text="Reconfigure"/>
 
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
+            <Button
+                android:id="@+id/reconfigf1btn"
+                android:layout_width="2dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                android:text="Enter F1 Command ->" />
+
+            <EditText
+                android:id="@+id/inputReconfigF1Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:visibility="invisible"
+                android:layout_weight="1" />
+            <Button
+                android:id="@+id/reconfigf2btn"
+                android:layout_width="2dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                android:text="Enter F2 Command ->" />
+
+            <EditText
+                android:id="@+id/inputReconfigF2Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:visibility="invisible"
+                android:layout_weight="1" />
+
+        </LinearLayout>
 
         <ListView
             android:id="@+id/chatListView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_height="326dp"
             android:layout_marginTop="8dp"
+            android:layout_weight="1"
             android:stackFromBottom="true"
-            android:transcriptMode="alwaysScroll">
-        </ListView>
+            android:transcriptMode="alwaysScroll"></ListView>
 
         <LinearLayout
             android:layout_width="match_parent"

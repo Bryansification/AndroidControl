@@ -64,6 +64,9 @@ public class MainActivity extends AppCompatActivity implements
                 ChatFragment.class, null);
         mTabHost.addTab(mTabHost.newTabSpec("Bluetooth").setIndicator("Bluetooth", null),
                 BluetoothFragment.class, null);
+        mTabHost.addTab(mTabHost.newTabSpec("Direction").setIndicator("Direction", null),
+                DirectionFragment.class, null);
+
 
         gridView = (GridView) findViewById(R.id.mapGridView);
 

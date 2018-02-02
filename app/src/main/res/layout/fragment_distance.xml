@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout   xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="ExtraText">
+
+
+    <TextView
+        android:id="@+id/robotStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/upBtn"
+        android:layout_toEndOf="@+id/rightBtn"
+        android:layout_toRightOf="@+id/rightBtn"
+        android:layout_marginLeft="20dp"
+        android:text="Robot Status:"
+        tools:layout_editor_absoluteX="240dp"
+        tools:layout_editor_absoluteY="34dp" />
+
+    <ImageButton
+        android:id="@+id/upBtn"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_above="@+id/leftBtn"
+        android:layout_toEndOf="@id/leftBtn"
+        android:layout_toRightOf="@id/leftBtn"
+        android:src="@drawable/up" />
+
+    <ImageButton
+        android:id="@+id/downBtn"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_below="@+id/rightBtn"
+        android:layout_toEndOf="@+id/leftBtn"
+        android:layout_toRightOf="@+id/leftBtn"
+        android:src="@drawable/down" />
+
+    <ImageButton
+        android:id="@+id/leftBtn"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_centerVertical="true"
+        android:src="@drawable/left"
+        android:layout_marginLeft="20dp"/>
+
+    <ImageButton
+        android:id="@+id/rightBtn"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@id/upBtn"
+        android:layout_toRightOf="@id/upBtn"
+        android:src="@drawable/right" />
+
+    <Button
+        android:id="@+id/wayPoint"
+        android:textAllCaps="true"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/robotStatus"
+        android:layout_alignRight="@+id/robotStatus"
+        android:layout_alignTop="@+id/rightBtn"
+        android:text="Waypoint"
+        />
+
+    <Button
+        android:id="@+id/startPoint"
+        android:textAllCaps="true"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/wayPoint"
+        android:layout_below="@+id/rightBtn"
+        android:text="Start Point" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="3dp"
+        android:padding="10dp"
+
+        android:orientation="vertical">
+
+
+
+        <Button
+            android:id="@+id/manualBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textAllCaps="true"
+            android:text="Manual"/>
+
+        <Button
+            android:id="@+id/autoBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textAllCaps="true"
+            android:text="Auto"/>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

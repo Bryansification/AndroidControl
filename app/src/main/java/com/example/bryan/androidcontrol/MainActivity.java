@@ -35,7 +35,11 @@ public class MainActivity extends AppCompatActivity implements
     private FragmentTabHost mTabHost;
     private static ChatFragment chatFragment;
     private static BluetoothFragment bluetoothFragment;
+<<<<<<< HEAD
     private static MapControlFragment mapControlFragment;
+=======
+    private static DirectionFragment directionFragment;
+>>>>>>> 99aabc53a602392db77997fbe8c42eb10fd9a73e
 
     private static GridView gridView;
     private static String mdfExploredString = "";
@@ -140,6 +144,7 @@ public class MainActivity extends AppCompatActivity implements
         if (attachedFragment.getClass().equals((ChatFragment.class))) {
             chatFragment = (ChatFragment)attachedFragment;
         }
+<<<<<<< HEAD
         if (attachedFragment.getClass().equals((MapControlFragment.class))) {
             mapControlFragment = (MapControlFragment) attachedFragment;
         }
@@ -173,6 +178,11 @@ public class MainActivity extends AppCompatActivity implements
         }
         isAutoUpdateToggled = isChecked;
     }
+=======
+        if (attachedFragment.getClass().equals((DirectionFragment.class))) {
+            directionFragment = (DirectionFragment)attachedFragment;
+        }
+>>>>>>> 99aabc53a602392db77997fbe8c42eb10fd9a73e
 
     @Override
     public void toggleWaypoint(boolean isChecked) {

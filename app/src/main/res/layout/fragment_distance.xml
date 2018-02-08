@@ -5,9 +5,11 @@
     android:layout_height="match_parent"
     tools:ignore="ExtraText">
 
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <TextView
-        android:id="@+id/robotStatus"
+        android:id="@+id/robotStatusTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/upBtn"
@@ -17,6 +19,35 @@
         android:text="Robot Status:"
         tools:layout_editor_absoluteX="240dp"
         tools:layout_editor_absoluteY="34dp" />
+
+    <EditText
+        android:id="@+id/robotStatusEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/rightBtn"
+        android:layout_toStartOf="@+id/robotStatus"
+        android:layout_toLeftOf="@+id/robotStatus"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text=""
+        android:hint="Status"/>
+
+    <Button
+        android:id="@+id/manualBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:textAllCaps="true"
+        android:text="Manual"/>
+
+    <Button
+        android:id="@+id/autoBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:textAllCaps="true"
+        android:text="Auto"/>
+</LinearLayout>
 
     <ImageButton
         android:id="@+id/upBtn"
@@ -53,26 +84,6 @@
         android:layout_toRightOf="@id/upBtn"
         android:src="@drawable/right" />
 
-    <Button
-        android:id="@+id/wayPoint"
-        android:textAllCaps="true"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/robotStatus"
-        android:layout_alignRight="@+id/robotStatus"
-        android:layout_alignTop="@+id/rightBtn"
-        android:text="Waypoint"
-        />
-
-    <Button
-        android:id="@+id/startPoint"
-        android:textAllCaps="true"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/wayPoint"
-        android:layout_below="@+id/rightBtn"
-        android:text="Start Point" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -84,24 +95,12 @@
 
 
 
-        <Button
-            android:id="@+id/manualBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:textAllCaps="true"
-            android:text="Manual"/>
 
-        <Button
-            android:id="@+id/autoBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:textAllCaps="true"
-            android:text="Auto"/>
 
 
     </LinearLayout>
+
+
 
 
 </RelativeLayout>

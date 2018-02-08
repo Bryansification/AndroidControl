@@ -178,11 +178,9 @@ public class MainActivity extends AppCompatActivity implements
         }
         isAutoUpdateToggled = isChecked;
     }
-=======
         if (attachedFragment.getClass().equals((DirectionFragment.class))) {
             directionFragment = (DirectionFragment)attachedFragment;
         }
->>>>>>> 99aabc53a602392db77997fbe8c42eb10fd9a73e
 
     @Override
     public void toggleWaypoint(boolean isChecked) {

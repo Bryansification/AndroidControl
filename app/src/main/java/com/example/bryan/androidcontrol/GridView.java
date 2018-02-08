@@ -196,7 +196,7 @@ public class GridView extends View {
              */
         }
         if (robotFront[0] >= 0) {
-            canvas.drawCircle(robotFront[0]*cellWidth+cellWidth/2,
+            canvas.drawCircle(robotFront[0]*cellWidth+ cellWidth/2,
                     (NUM_ROWS-robotFront[1])*cellHeight-cellHeight/2, 0.3f*cellWidth, cyanPaint);
             /**
              canvas.drawRect(robotFront[0] * cellWidth, (NUM_ROWS - 1 - robotFront[1]) * cellHeight,

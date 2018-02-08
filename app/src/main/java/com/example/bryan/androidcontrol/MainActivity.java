@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements
     private FragmentTabHost mTabHost;
     private static ChatFragment chatFragment;
     private static BluetoothFragment bluetoothFragment;
+    private static DirectionFragment directionFragment;
 
     private static GridView gridView;
     private static String mdfExploredString = "";
@@ -135,6 +136,9 @@ public class MainActivity extends AppCompatActivity implements
         }
         if (attachedFragment.getClass().equals((ChatFragment.class))) {
             chatFragment = (ChatFragment)attachedFragment;
+        }
+        if (attachedFragment.getClass().equals((DirectionFragment.class))) {
+            directionFragment = (DirectionFragment)attachedFragment;
         }
 
     }

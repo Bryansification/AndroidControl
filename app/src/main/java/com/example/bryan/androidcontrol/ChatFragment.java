@@ -66,16 +66,6 @@ public class ChatFragment extends Fragment {
                 }
             }
         });
-        f1Btn.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                String message = inputEditText.getText().toString();
-                prefs.edit().putString("f1Key", message).apply();
-                Toast.makeText(getContext(), "Command successfully assigned to F1",
-                        Toast.LENGTH_SHORT).show();
-                return false;
-            }
-        });
 
         f2Btn = view.findViewById(R.id.f2Btn);
         f2Btn.setOnClickListener(new View.OnClickListener() {

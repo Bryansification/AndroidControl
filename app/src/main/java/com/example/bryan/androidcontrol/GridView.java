@@ -207,6 +207,10 @@ public class GridView extends View {
 
     }
 
+    private void sendMessage(String message) {
+        MainActivity mainAct = (MainActivity) getContext();
+        mainAct.sendMessage(message);
+    }
 
     public void updateArrays(int[] obstacleArray, int[] exploredArray) {
         this.obstacleArray = obstacleArray;
@@ -217,7 +221,40 @@ public class GridView extends View {
         }
     }
 
+    public void updateRobotCoords(int col, int row, int direction) {
+        //Assuming coordinates come in array of 2
+        robotCenter[0] = col;   //X coord
+        robotCenter[1] = row;   //Y coord
+        angle = direction;
 
+        switch (direction) {
+            case 0:
+                robotFront[0] = robotCenter[0] + 1;
+                robotFront[1] = robotCenter[1];
+                break;
+            case 90:
+                robotFront[0] = robotCenter[0];
+                robotFront[1] = robotCenter[1] - 1;
+                break;
+            case 180:
+                robotFront[0] = robotCenter[0] - 1;
+                robotFront[1] = robotCenter[1];
+                break;
+            case 270:
+                robotFront[0] = robotCenter[0];
+                robotFront[1] = robotCenter[1] + 1;
+                break;
+
+        }
+
+        if (MainActivity.isAutoUpdateToggled) {
+            invalidate();
+        }
+    }
+
+    public int[] getWaypoint() {
+        return waypoint;
+    }
 
     public void setMapUnexplored(boolean b) {
         isMapUnexplored = b;
@@ -239,6 +276,41 @@ public class GridView extends View {
 
     }
 
+    @Override
+    public boolean onTouchEvent(MotionEvent event)
+    {
+        if (event.getAction() != MotionEvent.ACTION_DOWN)
+            return true;
 
+        if (MainActivity.isWaypointToggled) {
+            int x = (int) (event.getX() / cellWidth);
+            int y = NUM_ROWS - 1 - (int) (event.getY() / cellHeight);
+
+            if (x == waypoint[0] && y == waypoint[1]) {
+                waypoint[0] = -1;
+                waypoint[1] = -1;
+            } else {
+                waypoint[0] = x;
+                waypoint[1] = y;
+            }
+            MainActivity.setWayPointTextView(waypoint);
+            invalidate();
+
+        } else if (MainActivity.isRobotToggled) {
+            int x = (int) (event.getX() / cellWidth);
+            int y = NUM_ROWS - 1 - (int) (event.getY() / cellHeight);
+
+            if (x == robotCenter[0] && y == robotCenter[1]) {
+                updateRobotCoords(-1, -1, 270);
+
+            } else {
+                updateRobotCoords(x, y, 270);
+            }
+            MainActivity.setRobotTextView(robotCenter);
+            invalidate();
+        }
+
+        return true;
+    }
 
 }

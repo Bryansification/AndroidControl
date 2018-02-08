@@ -45,26 +45,27 @@
 
             <Button
                 android:id="@+id/reconfigf1btn"
-                android:layout_width="2dp"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:visibility="invisible"
-                android:text="Enter F1 Command ->" />
+                android:text="Enter F1 Command ->"
+                android:visibility="invisible" />
 
             <EditText
                 android:id="@+id/inputReconfigF1Text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:visibility="invisible"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:visibility="invisible" />
+
             <Button
                 android:id="@+id/reconfigf2btn"
-                android:layout_width="2dp"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:visibility="invisible"
-                android:text="Enter F2 Command ->" />
+                android:text="Enter F2 Command ->"
+                android:visibility="invisible" />
 
             <EditText
                 android:id="@+id/inputReconfigF2Text"

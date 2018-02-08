@@ -1,6 +1,7 @@
 package com.example.bryan.androidcontrol;
 
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -20,6 +21,11 @@ public class DirectionFragment extends Fragment {
     private static ImageButton leftBtn;
     private static ImageButton rightBtn;
 
+    /*@Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_distance, container, false);
 
@@ -67,6 +73,6 @@ public class DirectionFragment extends Fragment {
 
     return view;
     }
-
+*/
 
 }

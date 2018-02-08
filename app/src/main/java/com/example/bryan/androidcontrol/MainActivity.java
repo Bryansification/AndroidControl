@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements
+        MapControlFragment.OnFragmentInteractionListener,
         ChatFragment.OnFragmentInteractionListener,
         BluetoothFragment.OnFragmentInteractionListener{
 
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements
     private FragmentTabHost mTabHost;
     private static ChatFragment chatFragment;
     private static BluetoothFragment bluetoothFragment;
+    private static MapControlFragment mapControlFragment;
 
     private static GridView gridView;
     private static String mdfExploredString = "";
@@ -66,6 +68,8 @@ public class MainActivity extends AppCompatActivity implements
                 BluetoothFragment.class, null);
         mTabHost.addTab(mTabHost.newTabSpec("Direction").setIndicator("Direction", null),
                 DirectionFragment.class, null);
+        mTabHost.addTab(mTabHost.newTabSpec("Map Control").setIndicator("Map", null),
+                MapControlFragment.class, null);
 
 
         gridView = (GridView) findViewById(R.id.mapGridView);
@@ -136,8 +140,59 @@ public class MainActivity extends AppCompatActivity implements
         if (attachedFragment.getClass().equals((ChatFragment.class))) {
             chatFragment = (ChatFragment)attachedFragment;
         }
+        if (attachedFragment.getClass().equals((MapControlFragment.class))) {
+            mapControlFragment = (MapControlFragment) attachedFragment;
+        }
 
     }
+
+
+
+    public static void setWayPointTextView(int[] waypoint) {
+        mapControlFragment.setWaypointTextView(waypoint);
+    }
+
+    public static void setRobotTextView(int[] robot) {
+        mapControlFragment.setRobotTextView(robot);
+    }
+
+
+    @Override
+    public void manualUpdate() {
+        if (mdfExploredString.length() > 0) {
+            gridView.setMapUnexplored(true);
+        }
+        gridView.invalidate();
+    }
+
+    @Override
+    public void toggleAutoUpdate(boolean isChecked) {
+
+        if (mdfExploredString.length() > 0) {
+            gridView.setMapUnexplored(true);
+        }
+        isAutoUpdateToggled = isChecked;
+    }
+
+    @Override
+    public void toggleWaypoint(boolean isChecked) {
+
+        isWaypointToggled = isChecked;
+    }
+
+    @Override
+    public void toggleRobot(boolean isChecked) {
+
+        isRobotToggled = isChecked;
+
+    }
+
+    @Override
+    public void sendWaypoint() {
+        int[] waypoint = gridView.getWaypoint();
+        sendMessage(waypoint[1]+","+waypoint[0]);
+    }
+
 
 
 
@@ -216,18 +271,18 @@ public class MainActivity extends AppCompatActivity implements
                     // construct a string from the buffer
                     String writeMessage = new String(writeBuf);
                     if (ChatFragment.chatArrayAdapter != null) {
-                        ChatFragment.chatArrayAdapter.add("Group 3 Whoop: " + writeMessage);
+                        ChatFragment.chatArrayAdapter.add("MDP Group 3: " + writeMessage);
                     }
                     break;
 
-                // we are reading from here whenever a object is send to us
+                // Received messages
                 case MESSAGE_READ:
                     byte[] readBuf = (byte[]) msg.obj;
 
                     // construct a string from the valid bytes in the buffer
                     String readMessage = new String(readBuf, 0, msg.arg1);
-                    ChatFragment.chatArrayAdapter.add(connectedDeviceName + ": " + readMessage);
 
+                    Log.v("Received: ", readMessage);
 
                     break;
 
